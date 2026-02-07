@@ -1,24 +1,22 @@
-PACKAGE=qt
-$(package)_version=5.12.12
-#$(package)_download_path=https://download.qt.io/official_releases/qt/5.12/$($(package)_version)/submodules
-$(package)_download_path=https://download.qt.io/archive/qt/5.12/$($(package)_version)/submodules
-$(package)_suffix=everywhere-src-$($(package)_version).tar.xz
+package=qt
+$(package)_version=5.15.12
+#$(package)_download_path=https://download.qt.io/official_releases/qt/5.15/$($(package)_version)/submodules
+$(package)_download_path=https://download.qt.io/archive/qt/5.15/$($(package)_version)/submodules
+$(package)_suffix=everywhere-opensource-src-$($(package)_version).tar.xz
 $(package)_file_name=qtbase-$($(package)_suffix)
-$(package)_sha256_hash=39615553ee66e2c382ed656c12e2e92c5506a5e12f6c8d76d43e5950a7c49156
+$(package)_sha256_hash=4c01b7b0f1f3c1e05ae6bf53c66e49c65c6b3872475bac26b0fb228136914af0
 $(package)_dependencies=openssl
 $(package)_linux_dependencies=freetype fontconfig libxcb libxkbcommon
 $(package)_qt_libs=corelib network widgets gui plugins testlib
-$(package)_patches=fix_qt_pkgconfig.patch mac-qmake.conf fix_no_printer.patch no-xlib.patch
-$(package)_patches+= fix_android_qmake_conf.patch fix_android_jni_static.patch dont_hardcode_pwd.patch
-$(package)_patches+= drop_lrelease_dependency.patch no_sdk_version_check.patch
-$(package)_patches+= fix_lib_paths.patch fix_android_pch.patch
+$(package)_patches=mac-qmake.conf no-xlib.patch
+$(package)_patches+= dont_hardcode_pwd.patch drop_lrelease_dependency.patch
 $(package)_patches+= qtbase-moc-ignore-gcc-macro.patch
 
 $(package)_qttranslations_file_name=qttranslations-$($(package)_suffix)
-$(package)_qttranslations_sha256_hash=807f3f3ef29ca7863bc43725b84c832e52e126a113f8c8801d01726aeb7cba7c
+$(package)_qttranslations_sha256_hash=a830ba6158ccb36fdae97ebfa33ac7c2c92f4b609786717830d65aa2e0e77612
 
 $(package)_qttools_file_name=qttools-$($(package)_suffix)
-$(package)_qttools_sha256_hash=58da2075775c742c3830ec12b489953258c7e909da418f40781de88523b036f0
+$(package)_qttools_sha256_hash=9a4084fee80a2acebb6415efa5a28dd666960129895a0bb7d97468a9f0c66506
 
 $(package)_extra_sources  = $($(package)_qttranslations_file_name)
 $(package)_extra_sources += $($(package)_qttools_file_name)
@@ -110,6 +108,7 @@ $(package)_config_opts_darwin = -no-dbus
 $(package)_config_opts_darwin += -no-opengl
 $(package)_config_opts_darwin += -no-feature-corewlan
 $(package)_config_opts_darwin += -device-option QMAKE_MACOSX_DEPLOYMENT_TARGET=$(OSX_MIN_VERSION)
+$(package)_config_opts_darwin += -no-securetransport
 
 ifneq ($(build_os),darwin)
 $(package)_config_opts_darwin = OPENSSL_LIBS="-lssl -lcrypto -pthread -ldl"
@@ -123,6 +122,7 @@ $(package)_config_opts_darwin += -device-option XCODE_VERSION=$(XCODE_VERSION)
 endif
 
 # for macOS on Apple Silicon (ARM) see https://bugreports.qt.io/browse/QTBUG-85279
+$(package)_config_opts_aarch64_darwin += -device-option QMAKE_APPLE_DEVICE_ARCHS=arm64
 $(package)_config_opts_arm_darwin += -device-option QMAKE_APPLE_DEVICE_ARCHS=arm64
 
 $(package)_config_opts_linux = -qt-xcb
@@ -222,19 +222,15 @@ endef
 define $(package)_preprocess_cmds
   patch -p1 -i $($(package)_patch_dir)/drop_lrelease_dependency.patch && \
   patch -p1 -i $($(package)_patch_dir)/dont_hardcode_pwd.patch && \
-  patch -p1 -i $($(package)_patch_dir)/fix_qt_pkgconfig.patch && \
-  patch -p1 -i $($(package)_patch_dir)/fix_no_printer.patch && \
-  patch -p1 -i $($(package)_patch_dir)/fix_android_qmake_conf.patch && \
-  patch -p1 -i $($(package)_patch_dir)/fix_android_jni_static.patch && \
-  patch -p1 -i $($(package)_patch_dir)/fix_android_pch.patch && \
   patch -p1 -i $($(package)_patch_dir)/no-xlib.patch && \
-  patch -p1 -i $($(package)_patch_dir)/no_sdk_version_check.patch && \
-  patch -p1 -i $($(package)_patch_dir)/fix_lib_paths.patch && \
   patch -p1 -i $($(package)_patch_dir)/qtbase-moc-ignore-gcc-macro.patch && \
+  sed -i.old 's/#      include <fp.h>/#      include <math.h>/' qtbase/src/3rdparty/libpng/pngpriv.h && \
   sed -i.old "s|updateqm.commands = \$$$$\$$$$LRELEASE|updateqm.commands = $($(package)_extract_dir)/qttools/bin/lrelease|" qttranslations/translations/translations.pro && \
   mkdir -p qtbase/mkspecs/macx-clang-linux &&\
   cp -f qtbase/mkspecs/macx-clang/qplatformdefs.h qtbase/mkspecs/macx-clang-linux/ &&\
   cp -f $($(package)_patch_dir)/mac-qmake.conf qtbase/mkspecs/macx-clang-linux/qmake.conf && \
+  cp -f $($(package)_patch_dir)/mac-qmake.conf qtbase/mkspecs/macx-clang/qmake.conf && \
+  python3 -c "import os; p = 'qtbase/mkspecs/macx-clang/qmake.conf'; c = open(p).read(); c = c.replace(chr(36)*2 + '{MAC_SDK_PATH}', r'$(OSX_SDK)'); c = c.replace(chr(36)*2 + '{MAC_MIN_VERSION}', r'$(OSX_MIN_VERSION)'); c = c.replace(chr(36)*2 + '{MAC_SDK_VERSION}', r'$(OSX_SDK_VERSION)'); c = c.replace(chr(36)*2 + '{XCODE_VERSION}', r'$(XCODE_VERSION)'); c = c.replace(chr(36)*2 + '{MAC_TARGET}', r'$(host)'); open(p, 'w').write(c)" && \
   cp -r qtbase/mkspecs/linux-arm-gnueabi-g++ qtbase/mkspecs/bitcoin-linux-g++ && \
   sed -i.old "s/arm-linux-gnueabi-/$(host)-/g" qtbase/mkspecs/bitcoin-linux-g++/qmake.conf && \
   echo "!host_build: QMAKE_CFLAGS     += $($(package)_cflags) $($(package)_cppflags)" >> qtbase/mkspecs/common/gcc-base.conf && \

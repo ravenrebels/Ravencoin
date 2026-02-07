@@ -1,14 +1,14 @@
 package=miniupnpc
-$(package)_version=2.3.3
-$(package)_download_path=http://miniupnp.free.fr/files
+$(package)_version=2.2.2
+$(package)_download_path=https://bitcoincore.org/depends-sources
 $(package)_file_name=$(package)-$($(package)_version).tar.gz
-$(package)_sha256_hash=ee5e957df828d2fa1cc364e60c583d10439110888f086c9182071c96a374b2ad
+$(package)_sha256_hash=888fb0976ba61518276fe1eda988589c700a3f2a69d71089260d75562afd3687
 
 define $(package)_set_vars
 $(package)_build_opts=CC="$($(package)_cc)"
 $(package)_build_opts_darwin=OS=Darwin LIBTOOL="$($(package)_libtool)"
 $(package)_build_opts_mingw32=-f Makefile.mingw
-$(package)_build_env+=CFLAGS="$($(package)_cflags) $($(package)_cppflags)" AR="$($(package)_ar)"
+$(package)_build_env+=CFLAGS="$($(package)_cflags) $($(package)_cppflags) -include sys/socket.h -include net/if.h -include netinet/in.h -D_DARWIN_C_SOURCE" AR="$($(package)_ar)"
 endef
 
 define $(package)_preprocess_cmds

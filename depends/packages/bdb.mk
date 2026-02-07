@@ -9,7 +9,9 @@ define $(package)_set_vars
 $(package)_config_opts=--disable-shared --enable-cxx --disable-replication
 $(package)_config_opts_mingw32=--enable-mingw
 $(package)_config_opts_linux=--with-pic
-$(package)_cxxflags=-std=c++11
+$(package)_config_opts_darwin=--with-mutex=POSIX/pthreads/library
+$(package)_cxxflags += -std=c++11
+$(package)_cflags_darwin += -DSTDC_HEADERS=1 -D__STDC__=1
 endef
 
 define $(package)_preprocess_cmds
@@ -19,7 +21,9 @@ define $(package)_preprocess_cmds
 endef
 
 define $(package)_config_cmds
-  ../dist/$($(package)_autoconf)
+  ac_cv_header_stdarg_h=yes ../dist/$($(package)_autoconf) && \
+  sed -i.old 's/<varargs.h>/<stdarg.h>/' db_int.h && \
+  sed -i.old 's/define HAVE_VXWORKS/undef HAVE_VXWORKS/' db_int.h
 endef
 
 define $(package)_build_cmds
