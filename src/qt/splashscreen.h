@@ -6,8 +6,9 @@
 #ifndef RAVEN_QT_SPLASHSCREEN_H
 #define RAVEN_QT_SPLASHSCREEN_H
 
-#include <functional>
 #include <QSplashScreen>
+#include <boost/signals2/connection.hpp>
+#include <functional>
 
 class CWallet;
 class NetworkStyle;
@@ -23,22 +24,22 @@ class SplashScreen : public QWidget
     Q_OBJECT
 
 public:
-    explicit SplashScreen(const NetworkStyle *networkStyle);
+    explicit SplashScreen(const NetworkStyle* networkStyle);
     ~SplashScreen();
 
 protected:
-    void paintEvent(QPaintEvent *event);
-    void closeEvent(QCloseEvent *event);
+    void paintEvent(QPaintEvent* event);
+    void closeEvent(QCloseEvent* event);
 
 public Q_SLOTS:
     /** Slot to call finish() method as it's not defined as slot */
-    void slotFinish(QWidget *mainWin);
+    void slotFinish(QWidget* mainWin);
 
     /** Show message and progress */
-    void showMessage(const QString &message, int alignment, const QColor &color);
+    void showMessage(const QString& message, int alignment, const QColor& color);
 
 protected:
-    bool eventFilter(QObject * obj, QEvent * ev);
+    bool eventFilter(QObject* obj, QEvent* ev);
 
 private:
     /** Connect core signals to splash screen */
