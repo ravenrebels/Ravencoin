@@ -327,7 +327,7 @@ libraven_wallet_a_SOURCES = \
   $(RAVEN_CORE_H)
 
 # crypto primitives library
-crypto_libraven_crypto_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libraven_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(RAVEN_INCLUDES)
 crypto_libraven_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 crypto_libraven_crypto_a_SOURCES = \
   crypto/aes.cpp \

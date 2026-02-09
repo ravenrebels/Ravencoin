@@ -51,8 +51,10 @@
        <widget class="QWidget" name="contentWidget" native="true">
         <property name="styleSheet">
          <string notr="true">#contentWidget { background: rgba(255,255,255,240); border-radius: 6px; }
-
-QLabel { color: rgb(40,40,40);  }</string>
+QLabel { color: rgb(40,40,40); }
+QPushButton { background-color: rgb(40,40,40); color: rgb(255,255,255); border-radius: 4px; padding: 6px; }
+QPushButton:hover { background-color: rgb(60,60,60); }
+QPushButton:pressed { background-color: rgb(20,20,20); }</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayoutSub" stretch="1,0,0,0">
          <property name="spacing">
