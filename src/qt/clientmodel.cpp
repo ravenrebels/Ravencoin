@@ -169,6 +169,27 @@ void ClientModel::updateTimer()
     // the following calls will acquire the required lock
     Q_EMIT mempoolSizeChanged(getMempoolSize(), getMempoolDynamicUsage());
     Q_EMIT bytesChanged(getTotalBytesRecv(), getTotalBytesSent());
+
+    // Force check for header tip updates (workaround for missing signals on some platforms)
+    // Force check for header tip updates (workaround for missing signals on some platforms)
+    {
+        TRY_LOCK(cs_main, lockMain);
+        if (lockMain) {
+            if (pindexBestHeader) {
+                // fprintf(stderr, "ClientModel::updateTimer: height=%d cached=%d\n", pindexBestHeader->nHeight, cachedBestHeaderHeight);
+                if (pindexBestHeader->nHeight != cachedBestHeaderHeight) {
+                    fprintf(stderr, "ClientModel::updateTimer: EMITTING numBlocksChanged. New height=%d\n", pindexBestHeader->nHeight);
+                    cachedBestHeaderHeight = pindexBestHeader->nHeight;
+                    cachedBestHeaderTime = pindexBestHeader->GetBlockTime();
+                    Q_EMIT numBlocksChanged(cachedBestHeaderHeight, QDateTime::fromTime_t(cachedBestHeaderTime), getVerificationProgress(pindexBestHeader), true);
+                }
+            } else {
+                fprintf(stderr, "ClientModel::updateTimer: pindexBestHeader is NULL\n");
+            }
+        } else {
+            // fprintf(stderr, "ClientModel::updateTimer: Could not acquire lock\n");
+        }
+    }
 }
 
 void ClientModel::updateNumConnections(int numConnections)
