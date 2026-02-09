@@ -4,6 +4,10 @@ QToolTip{
   border:1px solid palette(highlight);
   border-radius:4px;
 }
+/* FORCE BACKGROUND for macOS */
+QMainWindow, QDialog {
+    background-color: palette(window);
+}
 QStatusBar{
   background-color:qlineargradient(x1:0,y1:0,x2:0,y2:1,stop:0 rgba(25,25,25,127),stop:1 rgba(53,53,53,75));
   color:palette(mid);
