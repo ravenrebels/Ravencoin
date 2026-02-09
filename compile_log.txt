@@ -1,0 +1,772 @@
+  CXX      libraven_util_a-util.o
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<bool, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:604:5: note: in instantiation of template class 'boost::hash_detail::hash_base<bool>' requested here
+  604 |     BOOST_HASH_SPECIALIZE(bool)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<bool, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<char, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:605:5: note: in instantiation of template class 'boost::hash_detail::hash_base<char>' requested here
+  605 |     BOOST_HASH_SPECIALIZE(char)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<char, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<signed char, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:606:5: note: in instantiation of template class 'boost::hash_detail::hash_base<signed char>' requested here
+  606 |     BOOST_HASH_SPECIALIZE(signed char)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<signed char, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<unsigned char, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:607:5: note: in instantiation of template class 'boost::hash_detail::hash_base<unsigned char>' requested here
+  607 |     BOOST_HASH_SPECIALIZE(unsigned char)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<unsigned char, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<wchar_t, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:609:5: note: in instantiation of template class 'boost::hash_detail::hash_base<wchar_t>' requested here
+  609 |     BOOST_HASH_SPECIALIZE(wchar_t)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<wchar_t, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<char16_t, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:612:5: note: in instantiation of template class 'boost::hash_detail::hash_base<char16_t>' requested here
+  612 |     BOOST_HASH_SPECIALIZE(char16_t)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<char16_t, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<char32_t, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:615:5: note: in instantiation of template class 'boost::hash_detail::hash_base<char32_t>' requested here
+  615 |     BOOST_HASH_SPECIALIZE(char32_t)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<char32_t, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<short, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:617:5: note: in instantiation of template class 'boost::hash_detail::hash_base<short>' requested here
+  617 |     BOOST_HASH_SPECIALIZE(short)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<short, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<unsigned short, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:618:5: note: in instantiation of template class 'boost::hash_detail::hash_base<unsigned short>' requested here
+  618 |     BOOST_HASH_SPECIALIZE(unsigned short)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<unsigned short, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<int, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:619:5: note: in instantiation of template class 'boost::hash_detail::hash_base<int>' requested here
+  619 |     BOOST_HASH_SPECIALIZE(int)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<int, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<unsigned int, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:620:5: note: in instantiation of template class 'boost::hash_detail::hash_base<unsigned int>' requested here
+  620 |     BOOST_HASH_SPECIALIZE(unsigned int)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<unsigned int, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<long, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:621:5: note: in instantiation of template class 'boost::hash_detail::hash_base<long>' requested here
+  621 |     BOOST_HASH_SPECIALIZE(long)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<long, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<unsigned long, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:622:5: note: in instantiation of template class 'boost::hash_detail::hash_base<unsigned long>' requested here
+  622 |     BOOST_HASH_SPECIALIZE(unsigned long)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<unsigned long, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<float, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:624:5: note: in instantiation of template class 'boost::hash_detail::hash_base<float>' requested here
+  624 |     BOOST_HASH_SPECIALIZE(float)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<float, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<double, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:625:5: note: in instantiation of template class 'boost::hash_detail::hash_base<double>' requested here
+  625 |     BOOST_HASH_SPECIALIZE(double)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<double, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<long double, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:626:5: note: in instantiation of template class 'boost::hash_detail::hash_base<long double>' requested here
+  626 |     BOOST_HASH_SPECIALIZE(long double)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<long double, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<std::string, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:628:5: note: in instantiation of template class 'boost::hash_detail::hash_base<std::string>' requested here
+  628 |     BOOST_HASH_SPECIALIZE_REF(std::string)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:586:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE_REF'
+  586 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<std::string, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<std::wstring, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:630:5: note: in instantiation of template class 'boost::hash_detail::hash_base<std::wstring>' requested here
+  630 |     BOOST_HASH_SPECIALIZE_REF(std::wstring)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:586:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE_REF'
+  586 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<std::wstring, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<std::u16string, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:633:5: note: in instantiation of template class 'boost::hash_detail::hash_base<std::u16string>' requested here
+  633 |     BOOST_HASH_SPECIALIZE_REF(std::basic_string<char16_t>)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:586:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE_REF'
+  586 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<std::u16string, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<std::u32string, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:636:5: note: in instantiation of template class 'boost::hash_detail::hash_base<std::u32string>' requested here
+  636 |     BOOST_HASH_SPECIALIZE_REF(std::basic_string<char32_t>)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:586:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE_REF'
+  586 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<std::u32string, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<std::string_view, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:640:5: note: in instantiation of template class 'boost::hash_detail::hash_base<std::string_view>' requested here
+  640 |     BOOST_HASH_SPECIALIZE_REF(std::string_view)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:586:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE_REF'
+  586 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<std::string_view, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<std::wstring_view, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:642:5: note: in instantiation of template class 'boost::hash_detail::hash_base<std::wstring_view>' requested here
+  642 |     BOOST_HASH_SPECIALIZE_REF(std::wstring_view)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:586:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE_REF'
+  586 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<std::wstring_view, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<std::u16string_view, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:645:5: note: in instantiation of template class 'boost::hash_detail::hash_base<std::u16string_view>' requested here
+  645 |     BOOST_HASH_SPECIALIZE_REF(std::basic_string_view<char16_t>)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:586:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE_REF'
+  586 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<std::u16string_view, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<std::u32string_view, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:648:5: note: in instantiation of template class 'boost::hash_detail::hash_base<std::u32string_view>' requested here
+  648 |     BOOST_HASH_SPECIALIZE_REF(std::basic_string_view<char32_t>)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:586:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE_REF'
+  586 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<std::u32string_view, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<long long, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:653:5: note: in instantiation of template class 'boost::hash_detail::hash_base<long long>' requested here
+  653 |     BOOST_HASH_SPECIALIZE(boost::long_long_type)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<long long, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<unsigned long long, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:654:5: note: in instantiation of template class 'boost::hash_detail::hash_base<unsigned long long>' requested here
+  654 |     BOOST_HASH_SPECIALIZE(boost::ulong_long_type)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<unsigned long long, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<__int128, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:658:5: note: in instantiation of template class 'boost::hash_detail::hash_base<__int128>' requested here
+  658 |     BOOST_HASH_SPECIALIZE(boost::int128_type)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<__int128, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<unsigned __int128, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:659:5: note: in instantiation of template class 'boost::hash_detail::hash_base<unsigned __int128>' requested here
+  659 |     BOOST_HASH_SPECIALIZE(boost::uint128_type)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<unsigned __int128, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<std::type_index, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:674:5: note: in instantiation of template class 'boost::hash_detail::hash_base<std::type_index>' requested here
+  674 |     BOOST_HASH_SPECIALIZE(std::type_index)
+      |     ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:576:19: note: expanded from macro 'BOOST_HASH_SPECIALIZE'
+  576 |          : public boost::hash_detail::hash_base<type> \
+      |                   ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<std::type_index, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:24:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/future.hpp:51:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/optional.hpp:15:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/optional/optional.hpp:38:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/type_traits/has_nothrow_constructor.hpp:27:84: warning: builtin __has_nothrow_constructor is deprecated; use __is_nothrow_constructible instead [-Wdeprecated-builtins]
+   27 | template <class T> struct has_nothrow_constructor : public integral_constant<bool, BOOST_HAS_NOTHROW_CONSTRUCTOR(T)>{};
+      |                                                                                    ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/type_traits/intrinsics.hpp:199:48: note: expanded from macro 'BOOST_HAS_NOTHROW_CONSTRUCTOR'
+  199 | #     define BOOST_HAS_NOTHROW_CONSTRUCTOR(T) (__has_nothrow_constructor(T) && is_default_constructible<T>::value)
+      |                                                ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:24:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/future.hpp:51:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/optional.hpp:15:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/optional/optional.hpp:47:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/type_traits/is_nothrow_move_assignable.hpp:16:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/type_traits/has_nothrow_assign.hpp:65:7: warning: builtin __has_nothrow_assign is deprecated; use __is_nothrow_assignable instead [-Wdeprecated-builtins]
+   65 |       BOOST_HAS_NOTHROW_ASSIGN(T)
+      |       ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/type_traits/intrinsics.hpp:205:43: note: expanded from macro 'BOOST_HAS_NOTHROW_ASSIGN'
+  205 | #     define BOOST_HAS_NOTHROW_ASSIGN(T) (__has_nothrow_assign(T) && !is_volatile<T>::value && is_assignable<T&, const T&>::value)
+      |                                           ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:24:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/future.hpp:65:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/function.hpp:30:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/function/detail/prologue.hpp:17:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/function/function_base.hpp:22:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/type_traits/has_trivial_copy.hpp:34:4: warning: builtin __has_trivial_copy is deprecated; use __is_trivially_copyable instead [-Wdeprecated-builtins]
+   34 |    BOOST_HAS_TRIVIAL_COPY(T) BOOST_TT_TRIVIAL_CONSTRUCT_FIX
+      |    ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/type_traits/intrinsics.hpp:190:41: note: expanded from macro 'BOOST_HAS_TRIVIAL_COPY'
+  190 | #     define BOOST_HAS_TRIVIAL_COPY(T) (__has_trivial_copy(T) && !is_reference<T>::value)
+      |                                         ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:24:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/future.hpp:65:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/function.hpp:30:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/function/detail/prologue.hpp:17:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/function/function_base.hpp:23:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/type_traits/has_trivial_destructor.hpp:30:86: warning: builtin __has_trivial_destructor is deprecated; use __is_trivially_destructible instead [-Wdeprecated-builtins]
+   30 | template <typename T> struct has_trivial_destructor : public integral_constant<bool, BOOST_HAS_TRIVIAL_DESTRUCTOR(T)>{};
+      |                                                                                      ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/type_traits/intrinsics.hpp:196:47: note: expanded from macro 'BOOST_HAS_TRIVIAL_DESTRUCTOR'
+  196 | #     define BOOST_HAS_TRIVIAL_DESTRUCTOR(T) (__has_trivial_destructor(T)  && is_destructible<T>::value)
+      |                                               ^
+In file included from util.cpp:85:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread.hpp:13:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread.hpp:12:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/thread_only.hpp:22:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/thread/detail/thread.hpp:41:
+In file included from /Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/functional/hash.hpp:6:
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:131:33: warning: 'unary_function<const std::error_category *, unsigned long>' is deprecated [-Wdeprecated-declarations]
+  131 |         struct hash_base : std::unary_function<T, std::size_t> {};
+      |                                 ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:687:18: note: in instantiation of template class 'boost::hash_detail::hash_base<const std::error_category *>' requested here
+  687 |         : public boost::hash_detail::hash_base<T*>
+      |                  ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:415:24: note: in instantiation of template class 'boost::hash<const std::error_category *>' requested here
+  415 |         boost::hash<T> hasher;
+      |                        ^
+/Users/listen/dev/Ravencoin/depends/aarch64-apple-darwin/include/boost/container_hash/hash.hpp:546:9: note: in instantiation of function template specialization 'boost::hash_combine<const std::error_category *>' requested here
+  546 |         hash_combine(seed, &v.category());
+      |         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_function.h:23:29: note: 'unary_function<const std::error_category *, unsigned long>' has been explicitly marked deprecated here
+   23 | struct _LIBCPP_TEMPLATE_VIS _LIBCPP_DEPRECATED_IN_CXX11 unary_function {
+      |                             ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:725:41: note: expanded from macro '_LIBCPP_DEPRECATED_IN_CXX11'
+  725 | #    define _LIBCPP_DEPRECATED_IN_CXX11 _LIBCPP_DEPRECATED
+      |                                         ^
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:710:49: note: expanded from macro '_LIBCPP_DEPRECATED'
+  710 | #      define _LIBCPP_DEPRECATED __attribute__((__deprecated__))
+      |                                                 ^
+34 warnings generated.

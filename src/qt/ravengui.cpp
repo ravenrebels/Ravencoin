@@ -9,7 +9,6 @@
 
 #include "ravengui.h"
 
-#include "ravenunits.h"
 #include "clientmodel.h"
 #include "guiconstants.h"
 #include "guiutil.h"
@@ -20,13 +19,14 @@
 #include "optionsdialog.h"
 #include "optionsmodel.h"
 #include "platformstyle.h"
+#include "ravenunits.h"
 #include "rpcconsole.h"
 #include "utilitydialog.h"
 
 #ifdef ENABLE_WALLET
+#include "mnemonicdialog.h"
 #include "walletframe.h"
 #include "walletmodel.h"
-#include "mnemonicdialog.h"
 #endif // ENABLE_WALLET
 
 #ifdef Q_OS_MAC
@@ -34,31 +34,28 @@
 #endif
 
 #include "chainparams.h"
+#include "core_io.h"
+#include "darkstyle.h"
 #include "init.h"
 #include "ui_interface.h"
 #include "util.h"
-#include "core_io.h"
-#include "darkstyle.h"
 
 #include <iostream>
 
-#include <QDebug>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
-#include <QGraphicsDropShadowEffect>
-#include <QToolButton>
-#include <QPushButton>
-#include <QPainter>
-#include <QWidgetAction>
 #include <QAction>
 #include <QApplication>
+#include <QComboBox>
 #include <QDateTime>
+#include <QDebug>
 #include <QDragEnterEvent>
+#include <QGraphicsDropShadowEffect>
 #include <QListWidget>
 #include <QMenuBar>
 #include <QMessageBox>
 #include <QMimeData>
+#include <QPainter>
 #include <QProgressDialog>
+#include <QPushButton>
 #include <QScreen>
 #include <QSettings>
 #include <QShortcut>
@@ -67,8 +64,11 @@
 #include <QStyle>
 #include <QTimer>
 #include <QToolBar>
+#include <QToolButton>
 #include <QVBoxLayout>
-#include <QComboBox>
+#include <QWidgetAction>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
 
 // Fixing Boost 1.73 compile errors
 #include <boost/bind/bind.hpp>
@@ -78,12 +78,12 @@ using namespace boost::placeholders;
 #include <QTextDocument>
 #include <QUrl>
 #else
-#include <QUrlQuery>
-#include <validation.h>
-#include <tinyformat.h>
-#include <QFontDatabase>
-#include <univalue/include/univalue.h>
 #include <QDesktopServices>
+#include <QFontDatabase>
+#include <QUrlQuery>
+#include <tinyformat.h>
+#include <univalue/include/univalue.h>
+#include <validation.h>
 
 #endif
 
@@ -93,13 +93,13 @@ using namespace boost::placeholders;
 
 const std::string RavenGUI::DEFAULT_UIPLATFORM =
 #if defined(Q_OS_MAC)
-        "macosx"
+    "macosx"
 #elif defined(Q_OS_WIN)
-        "windows"
+    "windows"
 #else
-        "other"
+    "other"
 #endif
-        ;
+    ;
 
 /** Display name for default wallet name. Uses tilde to avoid name
  * collisions in the future with additional wallets */
@@ -107,20 +107,17 @@ const QString RavenGUI::DEFAULT_WALLET = "~Default";
 
 /* Bit of a bodge, c++ really doesn't want you to predefine values
  * in only header files, so we do one-time value assignment here. */
-std::array<CurrencyUnitDetails, 5> CurrencyUnits::CurrencyOptions = { {
-    { "BTC",    "RVNBTC"  , 1,          8},
-    { "mBTC",   "RVNBTC"  , 1000,       5},
-    { "µBTC",   "RVNBTC"  , 1000000,    2},
-    { "Satoshi","RVNBTC"  , 100000000,  0},
-    { "USDT",   "RVNUSDT" , 1,          5}
-} };
+std::array<CurrencyUnitDetails, 5> CurrencyUnits::CurrencyOptions = {{{"BTC", "RVNBTC", 1, 8},
+    {"mBTC", "RVNBTC", 1000, 5},
+    {"µBTC", "RVNBTC", 1000000, 2},
+    {"Satoshi", "RVNBTC", 100000000, 0},
+    {"USDT", "RVNUSDT", 1, 5}}};
 
-static bool ThreadSafeMessageBox(RavenGUI *gui, const std::string& message, const std::string& caption, unsigned int style);
+static bool ThreadSafeMessageBox(RavenGUI* gui, const std::string& message, const std::string& caption, unsigned int style);
 
-RavenGUI::RavenGUI(const PlatformStyle *_platformStyle, const NetworkStyle *networkStyle, QWidget *parent) :
-    QMainWindow(parent),
-    enableWallet(false),
-    platformStyle(_platformStyle)
+RavenGUI::RavenGUI(const PlatformStyle* _platformStyle, const NetworkStyle* networkStyle, QWidget* parent) : QMainWindow(parent),
+                                                                                                             enableWallet(false),
+                                                                                                             platformStyle(_platformStyle)
 
 {
     QSettings settings;
@@ -133,8 +130,7 @@ RavenGUI::RavenGUI(const PlatformStyle *_platformStyle, const NetworkStyle *netw
 #ifdef ENABLE_WALLET
     enableWallet = WalletModel::isWalletEnabled();
 #endif // ENABLE_WALLET
-    if(enableWallet)
-    {
+    if (enableWallet) {
         windowTitle += tr("Wallet");
     } else {
         windowTitle += tr("Node");
@@ -157,8 +153,7 @@ RavenGUI::RavenGUI(const PlatformStyle *_platformStyle, const NetworkStyle *netw
     rpcConsole = new RPCConsole(_platformStyle, 0);
     helpMessageDialog = new HelpMessageDialog(this, false);
 #ifdef ENABLE_WALLET
-    if(enableWallet)
-    {
+    if (enableWallet) {
         /** Create wallet frame and make it the central widget */
         walletFrame = new WalletFrame(_platformStyle, this);
         setCentralWidget(walletFrame);
@@ -212,19 +207,18 @@ RavenGUI::RavenGUI(const PlatformStyle *_platformStyle, const NetworkStyle *netw
     statusBar()->setSizeGripEnabled(false);
 
     // Status bar notification icons
-    QFrame *frameBlocks = new QFrame();
-    frameBlocks->setContentsMargins(0,0,0,0);
+    QFrame* frameBlocks = new QFrame();
+    frameBlocks->setContentsMargins(0, 0, 0, 0);
     frameBlocks->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
-    QHBoxLayout *frameBlocksLayout = new QHBoxLayout(frameBlocks);
-    frameBlocksLayout->setContentsMargins(3,0,3,0);
+    QHBoxLayout* frameBlocksLayout = new QHBoxLayout(frameBlocks);
+    frameBlocksLayout->setContentsMargins(3, 0, 3, 0);
     frameBlocksLayout->setSpacing(3);
     unitDisplayControl = new UnitDisplayStatusBarControl(platformStyle);
     labelWalletEncryptionIcon = new QLabel();
     labelWalletHDStatusIcon = new QLabel();
     connectionsControl = new GUIUtil::ClickableLabel();
     labelBlocksIcon = new GUIUtil::ClickableLabel();
-    if(enableWallet)
-    {
+    if (enableWallet) {
         frameBlocksLayout->addStretch();
         frameBlocksLayout->addWidget(unitDisplayControl);
         frameBlocksLayout->addStretch();
@@ -249,8 +243,7 @@ RavenGUI::RavenGUI(const PlatformStyle *_platformStyle, const NetworkStyle *netw
     // as they make the text unreadable (workaround for issue #1071)
     // See https://qt-project.org/doc/qt-4.8/gallery.html
     QString curStyle = QApplication::style()->metaObject()->className();
-    if(curStyle == "QWindowsStyle" || curStyle == "QWindowsXPStyle")
-    {
+    if (curStyle == "QWindowsStyle" || curStyle == "QWindowsXPStyle") {
         progressBar->setStyleSheet("QProgressBar { background-color: #e8e8e8; border: 1px solid grey; border-radius: 7px; padding: 1px; text-align: center; } QProgressBar::chunk { background: QLinearGradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #FF8000, stop: 1 orange); border-radius: 7px; margin: 0px; }");
     }
 
@@ -258,7 +251,7 @@ RavenGUI::RavenGUI(const PlatformStyle *_platformStyle, const NetworkStyle *netw
     statusBar()->addWidget(progressBar);
     statusBar()->addPermanentWidget(frameBlocks);
 
-    if(darkModeEnabled)
+    if (darkModeEnabled)
         statusBar()->setStyleSheet(QString(".QStatusBar{background-color: %1; border-top: 1px solid %2;}").arg(platformStyle->TopWidgetBackGroundColor().name(), platformStyle->TextColor().name()));
 
     // Install event filter to be able to catch status tip events (QEvent::StatusTip)
@@ -274,7 +267,7 @@ RavenGUI::RavenGUI(const PlatformStyle *_platformStyle, const NetworkStyle *netw
 
     modalOverlay = new ModalOverlay(this->centralWidget());
 #ifdef ENABLE_WALLET
-    if(enableWallet) {
+    if (enableWallet) {
         connect(walletFrame, SIGNAL(requestedSyncWarningInfo()), this, SLOT(showModalOverlay()));
         connect(labelBlocksIcon, SIGNAL(clicked(QPoint)), this, SLOT(showModalOverlay()));
         connect(progressBar, SIGNAL(clicked(QPoint)), this, SLOT(showModalOverlay()));
@@ -289,7 +282,7 @@ RavenGUI::~RavenGUI()
 
     QSettings settings;
     settings.setValue("MainWindowGeometry", saveGeometry());
-    if(trayIcon) // Hide tray icon, as deleting will let it linger until quit (on Ubuntu)
+    if (trayIcon) // Hide tray icon, as deleting will let it linger until quit (on Ubuntu)
         trayIcon->hide();
 #ifdef Q_OS_MAC
     delete appMenuBar;
@@ -324,7 +317,7 @@ void RavenGUI::createActions()
 #endif
     font.setWeight(QFont::Weight::ExtraLight);
 
-    QActionGroup *tabGroup = new QActionGroup(this);
+    QActionGroup* tabGroup = new QActionGroup(this);
 
     overviewAction = new QAction(platformStyle->SingleColorIconOnOff(":/icons/overview_selected", ":/icons/overview"), tr("&Overview"), this);
     overviewAction->setStatusTip(tr("Show general overview of wallet"));
@@ -395,7 +388,7 @@ void RavenGUI::createActions()
     messagingAction->setStatusTip(tr("Coming Soon"));
     messagingAction->setToolTip(messagingAction->statusTip());
     messagingAction->setCheckable(true);
-//    messagingAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_9));
+    //    messagingAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_9));
     messagingAction->setFont(font);
     tabGroup->addAction(messagingAction);
 
@@ -512,8 +505,7 @@ void RavenGUI::createActions()
     connect(quitAction, SIGNAL(triggered()), rpcConsole, SLOT(hide()));
 
 #ifdef ENABLE_WALLET
-    if(walletFrame)
-    {
+    if (walletFrame) {
         connect(encryptWalletAction, SIGNAL(triggered(bool)), walletFrame, SLOT(encryptWallet(bool)));
         connect(backupWalletAction, SIGNAL(triggered()), walletFrame, SLOT(backupWallet()));
         connect(changePassphraseAction, SIGNAL(triggered()), walletFrame, SLOT(changePassphrase()));
@@ -541,9 +533,8 @@ void RavenGUI::createMenuBar()
 #endif
 
     // Configure the menus
-    QMenu *file = appMenuBar->addMenu(tr("&File"));
-    if(walletFrame)
-    {
+    QMenu* file = appMenuBar->addMenu(tr("&File"));
+    if (walletFrame) {
         file->addAction(openAction);
         file->addAction(signMessageAction);
         file->addAction(verifyMessageAction);
@@ -554,9 +545,8 @@ void RavenGUI::createMenuBar()
     }
     file->addAction(quitAction);
 
-    QMenu *settings = appMenuBar->addMenu(tr("&Wallet"));
-    if(walletFrame)
-    {
+    QMenu* settings = appMenuBar->addMenu(tr("&Wallet"));
+    if (walletFrame) {
         settings->addAction(encryptWalletAction);
         settings->addAction(backupWalletAction);
         settings->addAction(changePassphraseAction);
@@ -565,9 +555,8 @@ void RavenGUI::createMenuBar()
     }
     settings->addAction(optionsAction);
 
-    QMenu *help = appMenuBar->addMenu(tr("&Help"));
-    if(walletFrame)
-    {
+    QMenu* help = appMenuBar->addMenu(tr("&Help"));
+    if (walletFrame) {
         help->addAction(openRPCConsoleAction);
         help->addAction(openWalletRepairAction);
     }
@@ -579,8 +568,7 @@ void RavenGUI::createMenuBar()
 
 void RavenGUI::createToolBars()
 {
-    if(walletFrame)
-    {
+    if (walletFrame) {
         QSettings settings;
         bool IconsOnly = settings.value("fToolbarIconsOnly", false).toBool();
 
@@ -593,13 +581,12 @@ void RavenGUI::createToolBars()
         toolbarWidget->setStyleSheet(widgetStyleSheet.arg(platformStyle->LightBlueColor().name(), platformStyle->DarkBlueColor().name()));
 
         labelToolbar = new QLabel();
-        labelToolbar->setContentsMargins(0,0,0,50);
+        labelToolbar->setContentsMargins(0, 0, 0, 50);
         labelToolbar->setAlignment(Qt::AlignLeft);
 
-        if(IconsOnly) {
+        if (IconsOnly) {
             labelToolbar->setPixmap(QPixmap::fromImage(QImage(":/icons/rvntext")));
-        }
-        else {
+        } else {
             labelToolbar->setPixmap(QPixmap::fromImage(QImage(":/icons/ravencointext")));
         }
         labelToolbar->setStyleSheet(".QLabel{background-color: transparent;}");
@@ -611,11 +598,10 @@ void RavenGUI::createToolBars()
         m_toolbar->setContextMenuPolicy(Qt::PreventContextMenu);
         m_toolbar->setMovable(false);
 
-        if(IconsOnly) {
+        if (IconsOnly) {
             m_toolbar->setMaximumWidth(65);
             m_toolbar->setToolButtonStyle(Qt::ToolButtonIconOnly);
-        }
-        else {
+        } else {
             m_toolbar->setMinimumWidth(labelToolbar->width());
             m_toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
         }
@@ -626,8 +612,8 @@ void RavenGUI::createToolBars()
         m_toolbar->addAction(createAssetAction);
         m_toolbar->addAction(transferAssetAction);
         m_toolbar->addAction(manageAssetAction);
-//        m_toolbar->addAction(messagingAction);
-//        m_toolbar->addAction(votingAction);
+        //        m_toolbar->addAction(messagingAction);
+        //        m_toolbar->addAction(votingAction);
         m_toolbar->addAction(restrictedAssetAction);
 
         QString openSansFontString = "font: normal 22pt \"Open Sans\";";
@@ -648,14 +634,14 @@ void RavenGUI::createToolBars()
                                ".QToolButton:disabled {color: gray;}";
 
         m_toolbar->setStyleSheet(tbStyleSheet.arg(platformStyle->ToolBarNotSelectedTextColor().name(),
-                                                platformStyle->ToolBarSelectedTextColor().name(),
-                                                platformStyle->DarkOrangeColor().name(), stringToUse));
+            platformStyle->ToolBarSelectedTextColor().name(),
+            platformStyle->DarkOrangeColor().name(), stringToUse));
 
         m_toolbar->setOrientation(Qt::Vertical);
         m_toolbar->setIconSize(QSize(40, 40));
 
         QLayout* lay = m_toolbar->layout();
-        for(int i = 0; i < lay->count(); ++i)
+        for (int i = 0; i < lay->count(); ++i)
             lay->itemAt(i)->setAlignment(Qt::AlignLeft);
 
         overviewAction->setChecked(true);
@@ -672,7 +658,7 @@ void RavenGUI::createToolBars()
 
         /** Create the shadow effects for the main wallet frame. Make it so it puts a shadow on the tool bar */
 #if !defined(Q_OS_MAC)
-        QGraphicsDropShadowEffect *walletFrameShadow = new QGraphicsDropShadowEffect;
+        QGraphicsDropShadowEffect* walletFrameShadow = new QGraphicsDropShadowEffect;
         walletFrameShadow->setBlurRadius(50);
         walletFrameShadow->setColor(COLOR_WALLETFRAME_SHADOW);
         walletFrameShadow->setXOffset(-8.0);
@@ -683,7 +669,7 @@ void RavenGUI::createToolBars()
         QString widgetBackgroundSytleSheet = QString(".QWidget{background-color: %1}").arg(platformStyle->TopWidgetBackGroundColor().name());
 
         // Set the headers widget options
-        headerWidget->setContentsMargins(0,25,0,0);
+        headerWidget->setContentsMargins(0, 25, 0, 0);
         headerWidget->setStyleSheet(widgetBackgroundSytleSheet);
         headerWidget->setGraphicsEffect(GUIUtil::getShadowEffect());
         headerWidget->setFixedHeight(75);
@@ -696,29 +682,29 @@ void RavenGUI::createToolBars()
 
         // Set the pricing information
         QHBoxLayout* priceLayout = new QHBoxLayout(headerWidget);
-        priceLayout->setContentsMargins(0,0,0,25);
+        priceLayout->setContentsMargins(0, 0, 0, 25);
         priceLayout->setDirection(QBoxLayout::LeftToRight);
         priceLayout->setAlignment(Qt::AlignVCenter);
-        labelCurrentMarket->setContentsMargins(50,0,0,0);
+        labelCurrentMarket->setContentsMargins(50, 0, 0, 0);
         labelCurrentMarket->setAlignment(Qt::AlignVCenter);
         labelCurrentMarket->setStyleSheet(STRING_LABEL_COLOR);
         labelCurrentMarket->setFont(currentMarketFont);
         labelCurrentMarket->setText(tr("Ravencoin Market Price"));
 
         QString currentPriceStyleSheet = ".QLabel{color: %1;}";
-        labelCurrentPrice->setContentsMargins(25,0,0,0);
+        labelCurrentPrice->setContentsMargins(25, 0, 0, 0);
         labelCurrentPrice->setAlignment(Qt::AlignVCenter);
         labelCurrentPrice->setStyleSheet(currentPriceStyleSheet.arg(COLOR_LABELS.name()));
         labelCurrentPrice->setFont(currentMarketFont);
 
         comboRvnUnit = new QComboBox(headerWidget);
         QStringList list;
-        for(int unitNum = 0; unitNum < CurrencyUnits::count(); unitNum++) {
+        for (int unitNum = 0; unitNum < CurrencyUnits::count(); unitNum++) {
             list.append(QString(CurrencyUnits::CurrencyOptions[unitNum].Header));
         }
         comboRvnUnit->addItems(list);
         comboRvnUnit->setFixedHeight(26);
-        comboRvnUnit->setContentsMargins(5,0,0,0);
+        comboRvnUnit->setContentsMargins(5, 0, 0, 0);
         comboRvnUnit->setStyleSheet(STRING_LABEL_COLOR);
         comboRvnUnit->setFont(currentMarketFont);
 
@@ -726,7 +712,7 @@ void RavenGUI::createToolBars()
         labelVersionUpdate->setTextFormat(Qt::RichText);
         labelVersionUpdate->setTextInteractionFlags(Qt::TextBrowserInteraction);
         labelVersionUpdate->setOpenExternalLinks(true);
-        labelVersionUpdate->setContentsMargins(0,0,15,0);
+        labelVersionUpdate->setContentsMargins(0, 0, 15, 0);
         labelVersionUpdate->setAlignment(Qt::AlignVCenter);
         labelVersionUpdate->setStyleSheet(STRING_LABEL_COLOR);
         labelVersionUpdate->setFont(currentMarketFont);
@@ -734,10 +720,10 @@ void RavenGUI::createToolBars()
 
         priceLayout->setGeometry(headerWidget->rect());
         priceLayout->addWidget(labelCurrentMarket, 0, Qt::AlignVCenter | Qt::AlignLeft);
-        priceLayout->addWidget(labelCurrentPrice, 0,  Qt::AlignVCenter | Qt::AlignLeft);
-        priceLayout->addWidget(comboRvnUnit, 0 , Qt::AlignBottom| Qt::AlignLeft);
+        priceLayout->addWidget(labelCurrentPrice, 0, Qt::AlignVCenter | Qt::AlignLeft);
+        priceLayout->addWidget(comboRvnUnit, 0, Qt::AlignBottom | Qt::AlignLeft);
         priceLayout->addStretch();
-        priceLayout->addWidget(labelVersionUpdate, 0 , Qt::AlignVCenter | Qt::AlignRight);
+        priceLayout->addWidget(labelVersionUpdate, 0, Qt::AlignVCenter | Qt::AlignRight);
 
         // Create the layout for widget to the right of the tool bar
         QVBoxLayout* mainFrameLayout = new QVBoxLayout(mainWalletWidget);
@@ -760,49 +746,48 @@ void RavenGUI::createToolBars()
 
         // Network request code for the header widget
         QObject::connect(networkManager, &QNetworkAccessManager::finished,
-                         this, [=](QNetworkReply *reply) {
-                    if (reply->error()) {
+            this, [=](QNetworkReply* reply) {
+                if (reply->error()) {
+                    labelCurrentPrice->setText("");
+                    qDebug() << reply->errorString();
+                    return;
+                }
+                // Get the data from the network request
+                QString answer = reply->readAll();
+
+                // Create regex expression to find the value with 8 decimals
+                QRegExp rx("\\d*.\\d\\d\\d\\d\\d\\d\\d\\d");
+                rx.indexIn(answer);
+
+                // List the found values
+                QStringList list = rx.capturedTexts();
+
+                QString currentPriceStyleSheet = ".QLabel{color: %1;}";
+                // Evaluate the current and next numbers and assign a color (green for positive, red for negative)
+                bool ok;
+                if (!list.isEmpty()) {
+                    double next = list.first().toDouble(&ok) * this->currentPriceDisplay->Scalar;
+                    if (!ok) {
+                        labelCurrentPrice->setStyleSheet(currentPriceStyleSheet.arg(COLOR_LABELS.name()));
                         labelCurrentPrice->setText("");
-                        qDebug() << reply->errorString();
-                        return;
-                    }
-                    // Get the data from the network request
-                    QString answer = reply->readAll();
-
-                    // Create regex expression to find the value with 8 decimals
-                    QRegExp rx("\\d*.\\d\\d\\d\\d\\d\\d\\d\\d");
-                    rx.indexIn(answer);
-
-                    // List the found values
-                    QStringList list = rx.capturedTexts();
-
-                    QString currentPriceStyleSheet = ".QLabel{color: %1;}";
-                    // Evaluate the current and next numbers and assign a color (green for positive, red for negative)
-                    bool ok;
-                    if (!list.isEmpty()) {
-                        double next = list.first().toDouble(&ok) * this->currentPriceDisplay->Scalar;
+                    } else {
+                        double current = labelCurrentPrice->text().toDouble(&ok);
                         if (!ok) {
-                            labelCurrentPrice->setStyleSheet(currentPriceStyleSheet.arg(COLOR_LABELS.name()));
-                            labelCurrentPrice->setText("");
+                            current = 0.00000000;
                         } else {
-                            double current = labelCurrentPrice->text().toDouble(&ok);
-                            if (!ok) {
-                                current = 0.00000000;
-                            } else {
-                                if (next < current && !this->unitChanged)
-                                    labelCurrentPrice->setStyleSheet(currentPriceStyleSheet.arg("red"));
-                                else if (next > current && !this->unitChanged)
-                                    labelCurrentPrice->setStyleSheet(currentPriceStyleSheet.arg("green"));
-                                else
-                                    labelCurrentPrice->setStyleSheet(currentPriceStyleSheet.arg(COLOR_LABELS.name()));
-                            }
-                            this->unitChanged = false;
-                            labelCurrentPrice->setText(QString("%1").arg(QString().setNum(next, 'f', this->currentPriceDisplay->Decimals)));
-                            labelCurrentPrice->setToolTip(tr("Brought to you by binance.com"));
+                            if (next < current && !this->unitChanged)
+                                labelCurrentPrice->setStyleSheet(currentPriceStyleSheet.arg("red"));
+                            else if (next > current && !this->unitChanged)
+                                labelCurrentPrice->setStyleSheet(currentPriceStyleSheet.arg("green"));
+                            else
+                                labelCurrentPrice->setStyleSheet(currentPriceStyleSheet.arg(COLOR_LABELS.name()));
                         }
+                        this->unitChanged = false;
+                        labelCurrentPrice->setText(QString("%1").arg(QString().setNum(next, 'f', this->currentPriceDisplay->Decimals)));
+                        labelCurrentPrice->setToolTip(tr("Brought to you by binance.com"));
                     }
                 }
-        );
+            });
 
         connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
 
@@ -818,95 +803,95 @@ void RavenGUI::createToolBars()
         // Get the latest Ravencoin release and let the user know if they are using the latest version
         // Network request code for the header widget
         QObject::connect(networkVersionManager, &QNetworkAccessManager::finished,
-                         this, [=](QNetworkReply *reply) {
-                    if (reply->error()) {
-                        qDebug() << reply->errorString();
-                        return;
-                    }
+            this, [=](QNetworkReply* reply) {
+                if (reply->error()) {
+                    qDebug() << reply->errorString();
+                    return;
+                }
 
-                    // Get the data from the network request
-                    QString answer = reply->readAll();
+                // Get the data from the network request
+                QString answer = reply->readAll();
 
-                    UniValue releases(UniValue::VARR);
-                    releases.read(answer.toStdString());
+                UniValue releases(UniValue::VARR);
+                releases.read(answer.toStdString());
 
-                    if (!releases.isArray()) {
-                        return;
-                    }
+                if (!releases.isArray()) {
+                    return;
+                }
 
-                    if (!releases.size()) {
-                        return;
-                    }
+                if (!releases.size()) {
+                    return;
+                }
 
-                    // Latest release lives in the first index of the array return from github v3 api
-                    auto latestRelease = releases[0];
+                // Latest release lives in the first index of the array return from github v3 api
+                auto latestRelease = releases[0];
 
-                    auto keys = latestRelease.getKeys();
-                    for (auto key : keys) {
-                       if (key == "tag_name") {
-                           auto latestVersion = latestRelease["tag_name"].get_str();
+                auto keys = latestRelease.getKeys();
+                for (auto key : keys) {
+                    if (key == "tag_name") {
+                        auto latestVersion = latestRelease["tag_name"].get_str();
 
-                           QRegExp rx("v(\\d+).(\\d+).(\\d+)");
-                           rx.indexIn(QString::fromStdString(latestVersion));
+                        QRegExp rx("v(\\d+).(\\d+).(\\d+)");
+                        rx.indexIn(QString::fromStdString(latestVersion));
 
-                           // List the found values
-                           QStringList list = rx.capturedTexts();
-                           static const int CLIENT_VERSION_MAJOR_INDEX = 1;
-                           static const int CLIENT_VERSION_MINOR_INDEX = 2;
-                           static const int CLIENT_VERSION_REVISION_INDEX = 3;
-                           bool fNewSoftwareFound = false;
-                           bool fStopSearch = false;
-                           if (list.size() >= 4) {
-                               if (CLIENT_VERSION_MAJOR < list[CLIENT_VERSION_MAJOR_INDEX].toInt()) {
-                                   fNewSoftwareFound = true;
-                               } else {
-                                   if (CLIENT_VERSION_MAJOR > list[CLIENT_VERSION_MAJOR_INDEX].toInt()) {
-                                       fStopSearch = true;
-                                   }
-                               }
+                        // List the found values
+                        QStringList list = rx.capturedTexts();
+                        static const int CLIENT_VERSION_MAJOR_INDEX = 1;
+                        static const int CLIENT_VERSION_MINOR_INDEX = 2;
+                        static const int CLIENT_VERSION_REVISION_INDEX = 3;
+                        bool fNewSoftwareFound = false;
+                        bool fStopSearch = false;
+                        if (list.size() >= 4) {
+                            if (CLIENT_VERSION_MAJOR < list[CLIENT_VERSION_MAJOR_INDEX].toInt()) {
+                                fNewSoftwareFound = true;
+                            } else {
+                                if (CLIENT_VERSION_MAJOR > list[CLIENT_VERSION_MAJOR_INDEX].toInt()) {
+                                    fStopSearch = true;
+                                }
+                            }
 
-                               if (!fStopSearch) {
-                                   if (CLIENT_VERSION_MINOR < list[CLIENT_VERSION_MINOR_INDEX].toInt()) {
-                                       fNewSoftwareFound = true;
-                                   } else {
-                                       if (CLIENT_VERSION_MINOR > list[CLIENT_VERSION_MINOR_INDEX].toInt()) {
-                                           fStopSearch = true;
-                                       }
-                                   }
-                               }
+                            if (!fStopSearch) {
+                                if (CLIENT_VERSION_MINOR < list[CLIENT_VERSION_MINOR_INDEX].toInt()) {
+                                    fNewSoftwareFound = true;
+                                } else {
+                                    if (CLIENT_VERSION_MINOR > list[CLIENT_VERSION_MINOR_INDEX].toInt()) {
+                                        fStopSearch = true;
+                                    }
+                                }
+                            }
 
-                               if (!fStopSearch) {
-                                   if (CLIENT_VERSION_REVISION < list[CLIENT_VERSION_REVISION_INDEX].toInt()) {
-                                       fNewSoftwareFound = true;
-                                   }
-                               }
-                           }
+                            if (!fStopSearch) {
+                                if (CLIENT_VERSION_REVISION < list[CLIENT_VERSION_REVISION_INDEX].toInt()) {
+                                    fNewSoftwareFound = true;
+                                }
+                            }
+                        }
 
-                           if (fNewSoftwareFound) {
-                               labelVersionUpdate->setToolTip(QString::fromStdString(strprintf("Currently running: %s\nLatest version: %s", FormatFullVersion(),
-                                                                                               latestVersion)));
-                               labelVersionUpdate->show();
+                        if (fNewSoftwareFound) {
+                            labelVersionUpdate->setToolTip(QString::fromStdString(strprintf("Currently running: %s\nLatest version: %s", FormatFullVersion(),
+                                latestVersion)));
+                            labelVersionUpdate->show();
 
-                               // Only display the message on startup to the user around 1/2 of the time
-                               if (GetRandInt(2) == 1) {
-                                   bool fRet = uiInterface.ThreadSafeQuestion(
-                                           strprintf("\nCurrently running: %s\nLatest version: %s", FormatFullVersion(),
-                                                     latestVersion) + "\n\nWould you like to visit the releases page?",
-                                           "",
-                                           "New Wallet Version Found",
-                                           CClientUIInterface::MSG_VERSION | CClientUIInterface::BTN_NO);
-                                   if (fRet) {
-                                       QString link = "https://github.com/RavenProject/Ravencoin/releases";
-                                       QDesktopServices::openUrl(QUrl(link));
-                                   }
-                               }
-                           } else {
-                               labelVersionUpdate->hide();
-                           }
-                       }
+                            // Only display the message on startup to the user around 1/2 of the time
+                            if (GetRandInt(2) == 1) {
+                                bool fRet = uiInterface.ThreadSafeQuestion(
+                                    strprintf("\nCurrently running: %s\nLatest version: %s", FormatFullVersion(),
+                                        latestVersion) +
+                                        "\n\nWould you like to visit the releases page?",
+                                    "",
+                                    "New Wallet Version Found",
+                                    CClientUIInterface::MSG_VERSION | CClientUIInterface::BTN_NO);
+                                if (fRet) {
+                                    QString link = "https://github.com/RavenProject/Ravencoin/releases";
+                                    QDesktopServices::openUrl(QUrl(link));
+                                }
+                            }
+                        } else {
+                            labelVersionUpdate->hide();
+                        }
                     }
                 }
-        );
+            });
 
         getLatestVersion();
     }
@@ -914,23 +899,21 @@ void RavenGUI::createToolBars()
 
 void RavenGUI::updateIconsOnlyToolbar(bool IconsOnly)
 {
-    if(IconsOnly) {
+    if (IconsOnly) {
         labelToolbar->setPixmap(QPixmap::fromImage(QImage(":/icons/rvntext")));
         m_toolbar->setMaximumWidth(65);
         m_toolbar->setToolButtonStyle(Qt::ToolButtonIconOnly);
-    }
-    else {
+    } else {
         labelToolbar->setPixmap(QPixmap::fromImage(QImage(":/icons/ravencointext")));
         m_toolbar->setMinimumWidth(labelToolbar->width());
         m_toolbar->setMaximumWidth(255);
-        m_toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);        
+        m_toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     }
 }
-void RavenGUI::setClientModel(ClientModel *_clientModel)
+void RavenGUI::setClientModel(ClientModel* _clientModel)
 {
     this->clientModel = _clientModel;
-    if(_clientModel)
-    {
+    if (_clientModel) {
         // Create system tray menu (or setup the dock menu) that late to prevent users from calling actions,
         // while the client has not yet fully loaded
         createTrayIconMenu();
@@ -942,55 +925,50 @@ void RavenGUI::setClientModel(ClientModel *_clientModel)
 
         modalOverlay->setKnownBestHeight(_clientModel->getHeaderTipHeight(), QDateTime::fromTime_t(_clientModel->getHeaderTipTime()));
         setNumBlocks(_clientModel->getNumBlocks(), _clientModel->getLastBlockDate(), _clientModel->getVerificationProgress(nullptr), false);
-        connect(_clientModel, SIGNAL(numBlocksChanged(int,QDateTime,double,bool)), this, SLOT(setNumBlocks(int,QDateTime,double,bool)));
+        connect(_clientModel, SIGNAL(numBlocksChanged(int, QDateTime, double, bool)), this, SLOT(setNumBlocks(int, QDateTime, double, bool)));
 
         // Receive and report messages from client model
-        connect(_clientModel, SIGNAL(message(QString,QString,unsigned int)), this, SLOT(message(QString,QString,unsigned int)));
+        connect(_clientModel, SIGNAL(message(QString, QString, unsigned int)), this, SLOT(message(QString, QString, unsigned int)));
 
         // Show progress dialog
-        connect(_clientModel, SIGNAL(showProgress(QString,int)), this, SLOT(showProgress(QString,int)));
+        connect(_clientModel, SIGNAL(showProgress(QString, int)), this, SLOT(showProgress(QString, int)));
 
         rpcConsole->setClientModel(_clientModel);
 #ifdef ENABLE_WALLET
-        if(walletFrame)
-        {
+        if (walletFrame) {
             walletFrame->setClientModel(_clientModel);
         }
 #endif // ENABLE_WALLET
         unitDisplayControl->setOptionsModel(_clientModel->getOptionsModel());
 
         OptionsModel* optionsModel = _clientModel->getOptionsModel();
-        if(optionsModel)
-        {
+        if (optionsModel) {
             // be aware of the tray icon disable state change reported by the OptionsModel object.
-            connect(optionsModel,SIGNAL(hideTrayIconChanged(bool)),this,SLOT(setTrayIconVisible(bool)));
+            connect(optionsModel, SIGNAL(hideTrayIconChanged(bool)), this, SLOT(setTrayIconVisible(bool)));
 
             // initialize the disable state of the tray icon with the current value in the model.
             setTrayIconVisible(optionsModel->getHideTrayIcon());
 
             // Signal to notify the settings have updated the display currency
-            connect(optionsModel,SIGNAL(displayCurrencyIndexChanged(int)), this, SLOT(onCurrencyChange(int)));
+            connect(optionsModel, SIGNAL(displayCurrencyIndexChanged(int)), this, SLOT(onCurrencyChange(int)));
 
             // Init the currency display from settings
             this->onCurrencyChange(optionsModel->getDisplayCurrencyIndex());
 
             // Signal to update toolbar on iconsonly checkbox clicked.
             connect(optionsModel, SIGNAL(updateIconsOnlyToolbar(bool)), this, SLOT(updateIconsOnlyToolbar(bool)));
-
         }
     } else {
         // Disable possibility to show main window via action
         toggleHideAction->setEnabled(false);
-        if(trayIconMenu)
-        {
+        if (trayIconMenu) {
             // Disable context menu on tray icon
             trayIconMenu->clear();
         }
         // Propagate cleared model to child objects
         rpcConsole->setClientModel(nullptr);
 #ifdef ENABLE_WALLET
-        if (walletFrame)
-        {
+        if (walletFrame) {
             walletFrame->setClientModel(nullptr);
         }
 #endif // ENABLE_WALLET
@@ -999,9 +977,9 @@ void RavenGUI::setClientModel(ClientModel *_clientModel)
 }
 
 #ifdef ENABLE_WALLET
-bool RavenGUI::addWallet(const QString& name, WalletModel *walletModel)
+bool RavenGUI::addWallet(const QString& name, WalletModel* walletModel)
 {
-    if(!walletFrame)
+    if (!walletFrame)
         return false;
     setWalletActionsEnabled(true);
     return walletFrame->addWallet(name, walletModel);
@@ -1009,14 +987,14 @@ bool RavenGUI::addWallet(const QString& name, WalletModel *walletModel)
 
 bool RavenGUI::setCurrentWallet(const QString& name)
 {
-    if(!walletFrame)
+    if (!walletFrame)
         return false;
     return walletFrame->setCurrentWallet(name);
 }
 
 void RavenGUI::removeAllWallets()
 {
-    if(!walletFrame)
+    if (!walletFrame)
         return;
     setWalletActionsEnabled(false);
     walletFrame->removeAllWallets();
@@ -1051,7 +1029,7 @@ void RavenGUI::setWalletActionsEnabled(bool enabled)
     /** RVN END */
 }
 
-void RavenGUI::createTrayIcon(const NetworkStyle *networkStyle)
+void RavenGUI::createTrayIcon(const NetworkStyle* networkStyle)
 {
 #ifndef Q_OS_MAC
     trayIcon = new QSystemTrayIcon(this);
@@ -1075,11 +1053,11 @@ void RavenGUI::createTrayIconMenu()
     trayIcon->setContextMenu(trayIconMenu);
 
     connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
-            this, SLOT(trayIconActivated(QSystemTrayIcon::ActivationReason)));
+        this, SLOT(trayIconActivated(QSystemTrayIcon::ActivationReason)));
 #else
     // Note: On Mac, the dock icon is used to provide the tray's functionality.
-    MacDockIconHandler *dockIconHandler = MacDockIconHandler::instance();
-    dockIconHandler->setMainWindow((QMainWindow *)this);
+    MacDockIconHandler* dockIconHandler = MacDockIconHandler::instance();
+    dockIconHandler->setMainWindow((QMainWindow*)this);
     trayIconMenu = dockIconHandler->dockMenu();
 #endif
 
@@ -1103,8 +1081,7 @@ void RavenGUI::createTrayIconMenu()
 #ifndef Q_OS_MAC
 void RavenGUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 {
-    if(reason == QSystemTrayIcon::Trigger)
-    {
+    if (reason == QSystemTrayIcon::Trigger) {
         // Click on system tray icon triggers show/hide of the main window
         toggleHidden();
     }
@@ -1113,7 +1090,7 @@ void RavenGUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 
 void RavenGUI::optionsClicked()
 {
-    if(!clientModel || !clientModel->getOptionsModel())
+    if (!clientModel || !clientModel->getOptionsModel())
         return;
 
     OptionsDialog dlg(this, enableWallet);
@@ -1123,7 +1100,7 @@ void RavenGUI::optionsClicked()
 
 void RavenGUI::aboutClicked()
 {
-    if(!clientModel)
+    if (!clientModel)
         return;
 
     HelpMessageDialog dlg(this, true);
@@ -1159,8 +1136,7 @@ void RavenGUI::showHelpMessageClicked()
 void RavenGUI::openClicked()
 {
     OpenURIDialog dlg(this);
-    if(dlg.exec())
-    {
+    if (dlg.exec()) {
         Q_EMIT receivedURI(dlg.getURI());
     }
 }
@@ -1230,13 +1206,28 @@ void RavenGUI::updateNetworkState()
 {
     int count = clientModel->getNumConnections();
     QString icon;
-    switch(count)
-    {
-    case 0: icon = ":/icons/connect_0"; break;
-    case 1: case 2: case 3: icon = ":/icons/connect_1"; break;
-    case 4: case 5: case 6: icon = ":/icons/connect_2"; break;
-    case 7: case 8: case 9: icon = ":/icons/connect_3"; break;
-    default: icon = ":/icons/connect_4"; break;
+    switch (count) {
+    case 0:
+        icon = ":/icons/connect_0";
+        break;
+    case 1:
+    case 2:
+    case 3:
+        icon = ":/icons/connect_1";
+        break;
+    case 4:
+    case 5:
+    case 6:
+        icon = ":/icons/connect_2";
+        break;
+    case 7:
+    case 8:
+    case 9:
+        icon = ":/icons/connect_3";
+        break;
+    default:
+        icon = ":/icons/connect_4";
+        break;
     }
 
     QString tooltip;
@@ -1252,7 +1243,7 @@ void RavenGUI::updateNetworkState()
     tooltip = QString("<nobr>") + tooltip + QString("</nobr>");
     connectionsControl->setToolTip(tooltip);
 
-    connectionsControl->setPixmap(platformStyle->SingleColorIcon(icon).pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
+    connectionsControl->setPixmap(platformStyle->SingleColorIcon(icon).pixmap(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE));
 }
 
 void RavenGUI::setNumConnections(int count)
@@ -1270,14 +1261,19 @@ void RavenGUI::updateHeadersSyncProgressLabel()
     int64_t headersTipTime = clientModel->getHeaderTipTime();
     int headersTipHeight = clientModel->getHeaderTipHeight();
     int estHeadersLeft = (GetTime() - headersTipTime) / GetParams().GetConsensus().nPowTargetSpacing;
-    if (estHeadersLeft > HEADER_HEIGHT_DELTA_SYNC)
-        progressBarLabel->setText(tr("Syncing Headers (%1%)...").arg(QString::number(100.0 / (headersTipHeight+estHeadersLeft)*headersTipHeight, 'f', 1)));
+    if (estHeadersLeft > HEADER_HEIGHT_DELTA_SYNC) {
+        int estimatedCount = clientModel->getEstimatedBlockCount();
+        if (estimatedCount > headersTipHeight) {
+            progressBarLabel->setText(tr("Syncing Headers (%1% (%2/%3))...").arg(QString::number(100.0 * headersTipHeight / estimatedCount, 'f', 1)).arg(headersTipHeight).arg(estimatedCount));
+        } else {
+            progressBarLabel->setText(tr("Syncing Headers (%1%)...").arg(QString::number(100.0 / (headersTipHeight + estHeadersLeft) * headersTipHeight, 'f', 1)));
+        }
+    }
 }
 
 void RavenGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVerificationProgress, bool header)
 {
-    if (modalOverlay)
-    {
+    if (modalOverlay) {
         if (header)
             modalOverlay->setKnownBestHeight(count, blockDate);
         else
@@ -1293,30 +1289,30 @@ void RavenGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVerif
     // Acquire current block source
     enum BlockSource blockSource = clientModel->getBlockSource();
     switch (blockSource) {
-        case BLOCK_SOURCE_NETWORK:
-            if (header) {
-                updateHeadersSyncProgressLabel();
-                return;
-            }
-            progressBarLabel->setText(tr("Synchronizing with network..."));
+    case BLOCK_SOURCE_NETWORK:
+        if (header) {
             updateHeadersSyncProgressLabel();
-            break;
-        case BLOCK_SOURCE_DISK:
-            if (header) {
-                progressBarLabel->setText(tr("Indexing blocks on disk..."));
-            } else {
-                progressBarLabel->setText(tr("Processing blocks on disk..."));
-            }
-            break;
-        case BLOCK_SOURCE_REINDEX:
-            progressBarLabel->setText(tr("Reindexing blocks on disk..."));
-            break;
-        case BLOCK_SOURCE_NONE:
-            if (header) {
-                return;
-            }
-            progressBarLabel->setText(tr("Connecting to peers..."));
-            break;
+            return;
+        }
+        progressBarLabel->setText(tr("Synchronizing with network..."));
+        updateHeadersSyncProgressLabel();
+        break;
+    case BLOCK_SOURCE_DISK:
+        if (header) {
+            progressBarLabel->setText(tr("Indexing blocks on disk..."));
+        } else {
+            progressBarLabel->setText(tr("Processing blocks on disk..."));
+        }
+        break;
+    case BLOCK_SOURCE_REINDEX:
+        progressBarLabel->setText(tr("Reindexing blocks on disk..."));
+        break;
+    case BLOCK_SOURCE_NONE:
+        if (header) {
+            return;
+        }
+        progressBarLabel->setText(tr("Connecting to peers..."));
+        break;
     }
 
     QString tooltip;
@@ -1327,14 +1323,12 @@ void RavenGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVerif
     tooltip = tr("Processed %n block(s) of transaction history.", "", count);
 
     // Set icon state: spinning if catching up, tick otherwise
-    if(secs < 90*60)
-    {
+    if (secs < 90 * 60) {
         tooltip = tr("Up to date") + QString(".<br>") + tooltip;
         labelBlocksIcon->setPixmap(platformStyle->SingleColorIcon(":/icons/synced").pixmap(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE));
 
 #ifdef ENABLE_WALLET
-        if(walletFrame)
-        {
+        if (walletFrame) {
             walletFrame->showOutOfSyncWarning(false);
             modalOverlay->showHide(true, true);
         }
@@ -1342,9 +1336,7 @@ void RavenGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVerif
 
         progressBarLabel->setVisible(false);
         progressBar->setVisible(false);
-    }
-    else
-    {
+    } else {
         QString timeBehindText = GUIUtil::formatNiceTimeOffset(secs);
 
         progressBarLabel->setVisible(true);
@@ -1354,18 +1346,17 @@ void RavenGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVerif
         progressBar->setVisible(true);
 
         tooltip = tr("Catching up...") + QString("<br>") + tooltip;
-        if(count != prevBlocks)
-        {
+        if (count != prevBlocks) {
             labelBlocksIcon->setPixmap(platformStyle->SingleColorIcon(QString(
-                ":/movies/spinner-%1").arg(spinnerFrame, 3, 10, QChar('0')))
-                .pixmap(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE));
+                                                                          ":/movies/spinner-%1")
+                                                                          .arg(spinnerFrame, 3, 10, QChar('0')))
+                    .pixmap(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE));
             spinnerFrame = (spinnerFrame + 1) % SPINNER_FRAMES;
         }
         prevBlocks = count;
 
 #ifdef ENABLE_WALLET
-        if(walletFrame)
-        {
+        if (walletFrame) {
             walletFrame->showOutOfSyncWarning(true);
             modalOverlay->showHide();
         }
@@ -1385,7 +1376,7 @@ void RavenGUI::setNumBlocks(int count, const QDateTime& blockDate, double nVerif
     progressBar->setToolTip(tooltip);
 }
 
-void RavenGUI::message(const QString &title, const QString &message, unsigned int style, bool *ret)
+void RavenGUI::message(const QString& title, const QString& message, unsigned int style, bool* ret)
 {
     QString strTitle = tr("Raven"); // default title
     // Default to information icon
@@ -1397,8 +1388,7 @@ void RavenGUI::message(const QString &title, const QString &message, unsigned in
     // Prefer supplied title over style based title
     if (!title.isEmpty()) {
         msgType = title;
-    }
-    else {
+    } else {
         switch (style) {
         case CClientUIInterface::MSG_ERROR:
             msgType = tr("Error");
@@ -1421,8 +1411,7 @@ void RavenGUI::message(const QString &title, const QString &message, unsigned in
     if (style & CClientUIInterface::ICON_ERROR) {
         nMBoxIcon = QMessageBox::Critical;
         nNotifyIcon = Notificator::Critical;
-    }
-    else if (style & CClientUIInterface::ICON_WARNING) {
+    } else if (style & CClientUIInterface::ICON_WARNING) {
         nMBoxIcon = QMessageBox::Warning;
         nNotifyIcon = Notificator::Warning;
     }
@@ -1439,22 +1428,18 @@ void RavenGUI::message(const QString &title, const QString &message, unsigned in
         int r = mBox.exec();
         if (ret != nullptr)
             *ret = r == QMessageBox::Ok;
-    }
-    else
+    } else
         notificator->notify((Notificator::Class)nNotifyIcon, strTitle, message);
 }
 
-void RavenGUI::changeEvent(QEvent *e)
+void RavenGUI::changeEvent(QEvent* e)
 {
     QMainWindow::changeEvent(e);
 #ifndef Q_OS_MAC // Ignored on Mac
-    if(e->type() == QEvent::WindowStateChange)
-    {
-        if(clientModel && clientModel->getOptionsModel() && clientModel->getOptionsModel()->getMinimizeToTray())
-        {
-            QWindowStateChangeEvent *wsevt = static_cast<QWindowStateChangeEvent*>(e);
-            if(!(wsevt->oldState() & Qt::WindowMinimized) && isMinimized())
-            {
+    if (e->type() == QEvent::WindowStateChange) {
+        if (clientModel && clientModel->getOptionsModel() && clientModel->getOptionsModel()->getMinimizeToTray()) {
+            QWindowStateChangeEvent* wsevt = static_cast<QWindowStateChangeEvent*>(e);
+            if (!(wsevt->oldState() & Qt::WindowMinimized) && isMinimized()) {
                 QTimer::singleShot(0, this, SLOT(hide()));
                 e->ignore();
             }
@@ -1463,20 +1448,16 @@ void RavenGUI::changeEvent(QEvent *e)
 #endif
 }
 
-void RavenGUI::closeEvent(QCloseEvent *event)
+void RavenGUI::closeEvent(QCloseEvent* event)
 {
 #ifndef Q_OS_MAC // Ignored on Mac
-    if(clientModel && clientModel->getOptionsModel())
-    {
-        if(!clientModel->getOptionsModel()->getMinimizeOnClose())
-        {
+    if (clientModel && clientModel->getOptionsModel()) {
+        if (!clientModel->getOptionsModel()->getMinimizeOnClose()) {
             // close rpcConsole in case it was open to make some space for the shutdown window
             rpcConsole->close();
 
             QApplication::quit();
-        }
-        else
-        {
+        } else {
             QMainWindow::showMinimized();
             event->ignore();
         }
@@ -1486,7 +1467,7 @@ void RavenGUI::closeEvent(QCloseEvent *event)
 #endif
 }
 
-void RavenGUI::showEvent(QShowEvent *event)
+void RavenGUI::showEvent(QShowEvent* event)
 {
     // enable the debug window when the main window shows up
     openRPCConsoleAction->setEnabled(true);
@@ -1510,27 +1491,26 @@ void RavenGUI::incomingTransaction(const QString& date, int unit, const CAmount&
         msg += tr("Label: %1\n").arg(label);
     else if (!address.isEmpty())
         msg += tr("Address: %1\n").arg(address);
-    message((amount)<0 ? tr("Sent transaction") : tr("Incoming transaction"),
-             msg, CClientUIInterface::MSG_INFORMATION);
+    message((amount) < 0 ? tr("Sent transaction") : tr("Incoming transaction"),
+        msg, CClientUIInterface::MSG_INFORMATION);
 }
 
 void RavenGUI::checkAssets()
 {
     // Check that status of RIP2 and activate the assets icon if it is active
-    if(AreAssetsDeployed()) {
+    if (AreAssetsDeployed()) {
         transferAssetAction->setDisabled(false);
         transferAssetAction->setToolTip(tr("Transfer assets to RVN addresses"));
         createAssetAction->setDisabled(false);
         createAssetAction->setToolTip(tr("Create new assets"));
         manageAssetAction->setDisabled(false);
-        }
-    else {
+    } else {
         transferAssetAction->setDisabled(true);
         transferAssetAction->setToolTip(tr("Assets not yet active"));
         createAssetAction->setDisabled(true);
         createAssetAction->setToolTip(tr("Assets not yet active"));
         manageAssetAction->setDisabled(true);
-        }
+    }
 
     if (AreRestrictedAssetsDeployed()) {
         restrictedAssetAction->setDisabled(false);
@@ -1543,30 +1523,27 @@ void RavenGUI::checkAssets()
 }
 #endif // ENABLE_WALLET
 
-void RavenGUI::dragEnterEvent(QDragEnterEvent *event)
+void RavenGUI::dragEnterEvent(QDragEnterEvent* event)
 {
     // Accept only URIs
-    if(event->mimeData()->hasUrls())
+    if (event->mimeData()->hasUrls())
         event->acceptProposedAction();
 }
 
-void RavenGUI::dropEvent(QDropEvent *event)
+void RavenGUI::dropEvent(QDropEvent* event)
 {
-    if(event->mimeData()->hasUrls())
-    {
-        for (const QUrl &uri : event->mimeData()->urls())
-        {
+    if (event->mimeData()->hasUrls()) {
+        for (const QUrl& uri : event->mimeData()->urls()) {
             Q_EMIT receivedURI(uri.toString());
         }
     }
     event->acceptProposedAction();
 }
 
-bool RavenGUI::eventFilter(QObject *object, QEvent *event)
+bool RavenGUI::eventFilter(QObject* object, QEvent* event)
 {
     // Catch status tip events
-    if (event->type() == QEvent::StatusTip)
-    {
+    if (event->type() == QEvent::StatusTip) {
         // Prevent adding text from setStatusTip(), if we currently use the status bar for displaying other stuff
         if (progressBarLabel->isVisible() || progressBar->isVisible())
             return true;
@@ -1578,8 +1555,7 @@ bool RavenGUI::eventFilter(QObject *object, QEvent *event)
 bool RavenGUI::handlePaymentRequest(const SendCoinsRecipient& recipient)
 {
     // URI has to be valid
-    if (walletFrame && walletFrame->handlePaymentRequest(recipient))
-    {
+    if (walletFrame && walletFrame->handlePaymentRequest(recipient)) {
         showNormalIfMinimized();
         gotoSendCoinsPage();
         return true;
@@ -1598,7 +1574,7 @@ void RavenGUI::setHDStatus(int hdEnabled)
         icon = ":/icons/hd_enabled_44";
     }
 
-    labelWalletHDStatusIcon->setPixmap(platformStyle->SingleColorIcon(icon).pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
+    labelWalletHDStatusIcon->setPixmap(platformStyle->SingleColorIcon(icon).pixmap(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE));
     labelWalletHDStatusIcon->setToolTip(hdEnabled ? tr("HD key generation is <b>enabled</b>") : tr("HD key generation is <b>disabled</b>"));
 
     // eventually disable the QLabel to set its opacity to 50%
@@ -1607,8 +1583,7 @@ void RavenGUI::setHDStatus(int hdEnabled)
 
 void RavenGUI::setEncryptionStatus(int status)
 {
-    switch(status)
-    {
+    switch (status) {
     case WalletModel::Unencrypted:
         labelWalletEncryptionIcon->hide();
         encryptWalletAction->setChecked(false);
@@ -1617,7 +1592,7 @@ void RavenGUI::setEncryptionStatus(int status)
         break;
     case WalletModel::Unlocked:
         labelWalletEncryptionIcon->show();
-        labelWalletEncryptionIcon->setPixmap(platformStyle->SingleColorIcon(":/icons/lock_open").pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
+        labelWalletEncryptionIcon->setPixmap(platformStyle->SingleColorIcon(":/icons/lock_open").pixmap(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE));
         labelWalletEncryptionIcon->setToolTip(tr("Wallet is <b>encrypted</b> and currently <b>unlocked</b>"));
         encryptWalletAction->setChecked(true);
         changePassphraseAction->setEnabled(true);
@@ -1625,7 +1600,7 @@ void RavenGUI::setEncryptionStatus(int status)
         break;
     case WalletModel::Locked:
         labelWalletEncryptionIcon->show();
-        labelWalletEncryptionIcon->setPixmap(platformStyle->SingleColorIcon(":/icons/lock_closed").pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
+        labelWalletEncryptionIcon->setPixmap(platformStyle->SingleColorIcon(":/icons/lock_closed").pixmap(STATUSBAR_ICONSIZE, STATUSBAR_ICONSIZE));
         labelWalletEncryptionIcon->setToolTip(tr("Wallet is <b>encrypted</b> and currently <b>locked</b>"));
         encryptWalletAction->setChecked(true);
         changePassphraseAction->setEnabled(true);
@@ -1637,26 +1612,20 @@ void RavenGUI::setEncryptionStatus(int status)
 
 void RavenGUI::showNormalIfMinimized(bool fToggleHidden)
 {
-    if(!clientModel)
+    if (!clientModel)
         return;
 
     // activateWindow() (sometimes) helps with keyboard focus on Windows
-    if (isHidden())
-    {
+    if (isHidden()) {
         show();
         activateWindow();
-    }
-    else if (isMinimized())
-    {
+    } else if (isMinimized()) {
         showNormal();
         activateWindow();
-    }
-    else if (GUIUtil::isObscured(this))
-    {
+    } else if (GUIUtil::isObscured(this)) {
         raise();
         activateWindow();
-    }
-    else if(fToggleHidden)
+    } else if (fToggleHidden)
         hide();
 }
 
@@ -1667,41 +1636,34 @@ void RavenGUI::toggleHidden()
 
 void RavenGUI::detectShutdown()
 {
-    if (ShutdownRequested())
-    {
-        if(rpcConsole)
+    if (ShutdownRequested()) {
+        if (rpcConsole)
             rpcConsole->hide();
         qApp->quit();
     }
 }
 
-void RavenGUI::showProgress(const QString &title, int nProgress)
+void RavenGUI::showProgress(const QString& title, int nProgress)
 {
-    if (nProgress == 0)
-    {
+    if (nProgress == 0) {
         progressDialog = new QProgressDialog(title, "", 0, 100);
         progressDialog->setWindowModality(Qt::ApplicationModal);
         progressDialog->setMinimumDuration(0);
         progressDialog->setCancelButton(0);
         progressDialog->setAutoClose(false);
         progressDialog->setValue(0);
-    }
-    else if (nProgress == 100)
-    {
-        if (progressDialog)
-        {
+    } else if (nProgress == 100) {
+        if (progressDialog) {
             progressDialog->close();
             progressDialog->deleteLater();
         }
-    }
-    else if (progressDialog)
+    } else if (progressDialog)
         progressDialog->setValue(nProgress);
 }
 
 void RavenGUI::setTrayIconVisible(bool fHideTrayIcon)
 {
-    if (trayIcon)
-    {
+    if (trayIcon) {
         trayIcon->setVisible(!fHideTrayIcon);
     }
 }
@@ -1712,7 +1674,7 @@ void RavenGUI::showModalOverlay()
         modalOverlay->toggleVisibility();
 }
 
-static bool ThreadSafeMessageBox(RavenGUI *gui, const std::string& message, const std::string& caption, unsigned int style)
+static bool ThreadSafeMessageBox(RavenGUI* gui, const std::string& message, const std::string& caption, unsigned int style)
 {
     bool modal = (style & CClientUIInterface::MODAL);
     // The SECURE flag has no effect in the Qt GUI.
@@ -1721,15 +1683,15 @@ static bool ThreadSafeMessageBox(RavenGUI *gui, const std::string& message, cons
     bool ret = false;
     // In case of modal message, use blocking connection to wait for user to click a button
     QMetaObject::invokeMethod(gui, "message",
-                               modal ? GUIUtil::blockingGUIThreadConnection() : Qt::QueuedConnection,
-                               Q_ARG(QString, QString::fromStdString(caption)),
-                               Q_ARG(QString, QString::fromStdString(message)),
-                               Q_ARG(unsigned int, style),
-                               Q_ARG(bool*, &ret));
+        modal ? GUIUtil::blockingGUIThreadConnection() : Qt::QueuedConnection,
+        Q_ARG(QString, QString::fromStdString(caption)),
+        Q_ARG(QString, QString::fromStdString(message)),
+        Q_ARG(unsigned int, style),
+        Q_ARG(bool*, &ret));
     return ret;
 }
 
-static bool ThreadSafeMnemonic(RavenGUI *gui, unsigned int style)
+static bool ThreadSafeMnemonic(RavenGUI* gui, unsigned int style)
 {
     bool modal = (style & CClientUIInterface::MODAL);
     // The SECURE flag has no effect in the Qt GUI.
@@ -1738,7 +1700,7 @@ static bool ThreadSafeMnemonic(RavenGUI *gui, unsigned int style)
     bool ret = false;
     // In case of modal message, use blocking connection to wait for user to click a button
     QMetaObject::invokeMethod(gui, "mnemonic",
-                              modal ? GUIUtil::blockingGUIThreadConnection() : Qt::QueuedConnection);
+        modal ? GUIUtil::blockingGUIThreadConnection() : Qt::QueuedConnection);
     return ret;
 }
 
@@ -1772,22 +1734,20 @@ void RavenGUI::handleRestart(QStringList args)
         Q_EMIT requestedRestart(args);
 }
 
-UnitDisplayStatusBarControl::UnitDisplayStatusBarControl(const PlatformStyle *platformStyle) :
-    optionsModel(0),
-    menu(0)
+UnitDisplayStatusBarControl::UnitDisplayStatusBarControl(const PlatformStyle* platformStyle) : optionsModel(0),
+                                                                                               menu(0)
 {
     createContextMenu(platformStyle);
     setToolTip(tr("Unit to show amounts in. Click to select another unit."));
     QList<RavenUnits::Unit> units = RavenUnits::availableUnits();
     int max_width = 0;
     const QFontMetrics fm(font());
-    for (const RavenUnits::Unit unit : units)
-    {
-    #ifndef QTversionPreFiveEleven
+    for (const RavenUnits::Unit unit : units) {
+#ifndef QTversionPreFiveEleven
         max_width = qMax(max_width, fm.horizontalAdvance(RavenUnits::name(unit)));
-    #else
+#else
         max_width = qMax(max_width, fm.width(RavenUnits::name(unit)));
-    #endif
+#endif
     }
     setMinimumSize(max_width, 0);
     setAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -1795,34 +1755,32 @@ UnitDisplayStatusBarControl::UnitDisplayStatusBarControl(const PlatformStyle *pl
 }
 
 /** So that it responds to button clicks */
-void UnitDisplayStatusBarControl::mousePressEvent(QMouseEvent *event)
+void UnitDisplayStatusBarControl::mousePressEvent(QMouseEvent* event)
 {
     onDisplayUnitsClicked(event->pos());
 }
 
 /** Creates context menu, its actions, and wires up all the relevant signals for mouse events. */
-void UnitDisplayStatusBarControl::createContextMenu(const PlatformStyle *platformStyle)
+void UnitDisplayStatusBarControl::createContextMenu(const PlatformStyle* platformStyle)
 {
     menu = new QMenu(this);
-    for (RavenUnits::Unit u : RavenUnits::availableUnits())
-    {
-        QAction *menuAction = new QAction(QString(RavenUnits::name(u)), this);
+    for (RavenUnits::Unit u : RavenUnits::availableUnits()) {
+        QAction* menuAction = new QAction(QString(RavenUnits::name(u)), this);
         menuAction->setData(QVariant(u));
         menu->addAction(menuAction);
     }
     menu->setStyleSheet(QString("QMenu::item{ color: %1; } QMenu::item:selected{ color: %2;}").arg(platformStyle->DarkOrangeColor().name(), platformStyle->TextColor().name()));
-    connect(menu,SIGNAL(triggered(QAction*)),this,SLOT(onMenuSelection(QAction*)));
+    connect(menu, SIGNAL(triggered(QAction*)), this, SLOT(onMenuSelection(QAction*)));
 }
 
 /** Lets the control know about the Options Model (and its signals) */
-void UnitDisplayStatusBarControl::setOptionsModel(OptionsModel *_optionsModel)
+void UnitDisplayStatusBarControl::setOptionsModel(OptionsModel* _optionsModel)
 {
-    if (_optionsModel)
-    {
+    if (_optionsModel) {
         this->optionsModel = _optionsModel;
 
         // be aware of a display unit change reported by the OptionsModel object.
-        connect(_optionsModel,SIGNAL(displayUnitChanged(int)),this,SLOT(updateDisplayUnit(int)));
+        connect(_optionsModel, SIGNAL(displayUnitChanged(int)), this, SLOT(updateDisplayUnit(int)));
 
         // initialize the display units label with the current value in the model.
         updateDisplayUnit(_optionsModel->getDisplayUnit());
@@ -1845,8 +1803,7 @@ void UnitDisplayStatusBarControl::onDisplayUnitsClicked(const QPoint& point)
 /** Tells underlying optionsModel to update its current display unit. */
 void UnitDisplayStatusBarControl::onMenuSelection(QAction* action)
 {
-    if (action)
-    {
+    if (action) {
         optionsModel->setDisplayUnit(action->data());
     }
 }
@@ -1854,8 +1811,7 @@ void UnitDisplayStatusBarControl::onMenuSelection(QAction* action)
 /** Triggered only when the user changes the combobox on the main GUI */
 void RavenGUI::currencySelectionChanged(int unitIndex)
 {
-    if(clientModel && clientModel->getOptionsModel())
-    {
+    if (clientModel && clientModel->getOptionsModel()) {
         clientModel->getOptionsModel()->setDisplayCurrencyIndex(unitIndex);
     }
 }
@@ -1865,14 +1821,14 @@ void RavenGUI::onCurrencyChange(int newIndex)
 {
     qDebug() << "RavenGUI::onPriceUnitChange: " + QString::number(newIndex);
 
-    if(newIndex < 0 || newIndex >= CurrencyUnits::count()){
+    if (newIndex < 0 || newIndex >= CurrencyUnits::count()) {
         return;
     }
 
     this->unitChanged = true;
     this->currentPriceDisplay = &CurrencyUnits::CurrencyOptions[newIndex];
-    //Update the main GUI box in case this was changed from the settings screen
-    //This will fire the event again, but the options model prevents the infinite loop
+    // Update the main GUI box in case this was changed from the settings screen
+    // This will fire the event again, but the options model prevents the infinite loop
     this->comboRvnUnit->setCurrentIndex(newIndex);
     this->getPriceInfo();
 }
@@ -1886,8 +1842,8 @@ void RavenGUI::getPriceInfo()
 #ifdef ENABLE_WALLET
 void RavenGUI::mnemonic()
 {
-        MnemonicDialog dlg(this);
-        dlg.exec();
+    MnemonicDialog dlg(this);
+    dlg.exec();
 }
 #endif
 
