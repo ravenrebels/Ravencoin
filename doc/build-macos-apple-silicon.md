@@ -7,7 +7,7 @@ This guide describes how to build Ravencoin on macOS systems with Apple Silicon 
 Install the necessary dependencies using [Homebrew](https://brew.sh):
 
 ```bash
-brew install automake libtool boost miniupnpc openssl@1.1 pkg-config protobuf qt libevent qrencode
+brew install automake libtool boost miniupnpc openssl@1.1 pkg-config protobuf qt@5 libevent qrencode berkeley-db@4
 ```
 
 ## 2. Prepare Build System
@@ -29,6 +29,8 @@ Configure the build. You must explicitly verify and set the paths to Homebrew li
   --with-boost-libdir=/opt/homebrew/lib \
   LDFLAGS="-L/opt/homebrew/opt/openssl@1.1/lib -L/opt/homebrew/opt/berkeley-db@4/lib -L/opt/homebrew/opt/qt@5/lib -L/opt/homebrew/lib" \
   CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include -I/opt/homebrew/opt/berkeley-db@4/include -I/opt/homebrew/opt/qt@5/include -I/opt/homebrew/include" \
+  BDB_CFLAGS="-I/opt/homebrew/opt/berkeley-db@4/include" \
+  BDB_LIBS="-L/opt/homebrew/opt/berkeley-db@4/lib -ldb_cxx-4.8" \
   PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@1.1/lib/pkgconfig:/opt/homebrew/opt/qt@5/lib/pkgconfig:/opt/homebrew/opt/libevent/lib/pkgconfig"
 ```
 
