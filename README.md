@@ -5,6 +5,9 @@ https://ravencoin.org
 
 To see how to run Ravencoin, please read the respective files in [the doc folder](doc)
 
+## Key Technical Improvements
+1. **🍏 Apple Silicon Support:** This fork includes fixes for building and running Ravencoin on macOS Apple Silicon (M1, M2, M3, M4, M5) devices. See [docs](doc/build-macos-apple-silicon.md).
+2. **💎 Qt 5 Upgrade:** We have upgraded the GUI to use Qt 5.15.18, providing better stability and Dark Mode support across all operating systems.
 
 What is Ravencoin?
 ----------------

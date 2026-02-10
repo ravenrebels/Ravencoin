@@ -1,3 +1,5 @@
+**Note for Apple Silicon (M1, M2, M3, M4, M5) users:** Please see [build-macos-apple-silicon.md](build-macos-apple-silicon.md) for specific instructions.
+
 macOS Build Instructions and Notes
 ====================================
 The commands in this guide should be executed in a Terminal application.
